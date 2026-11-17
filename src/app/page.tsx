@@ -6,7 +6,7 @@ export default async function Home() {
   const filmes = await getTrendindMovies();
   return (
     <>
-      <Title title="Filmes em destaque" />
+      <Title title="Destaque" />
       <Grid filmes={filmes} />
     </>
   );
