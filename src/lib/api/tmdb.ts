@@ -1,42 +1,42 @@
 import { Filme } from "@/types/types";
 import tmdbApi from "./axios";
 
-
 type Data = {
-    results: Filme[]
-}
+  results: Filme[];
+};
 
- export const getTrendindMovies = async () => {
+export const getTrendindMovies = async () => {
+  const res = await tmdbApi.get<Data>(
+    `/trending/movie/week?language=pt-BR&page=1`,
+  );
 
-    const res = await tmdbApi.get<Data>(`/trending/movie/week?language=pt-BR&page=1`)
+  return res.data.results;
+};
 
-    return res.data.results;
-}
+export const getMovieDetails = async (
+  id: number,
+): Promise<Filme | undefined> => {
+  const res = await tmdbApi.get<Filme>(`/movie/${id}?language=pt-BR`);
 
- export const getMovieDetails = async (id: number) : Promise<Filme | undefined> => {
+  return res.data;
+};
 
-    const res = await tmdbApi.get<Filme>(`/movie/${id}?language=pt-BR`)
+export const getNowPlaying = async () => {
+  const res = await tmdbApi.get<Data>(
+    `/movie/now_playing?language=pt-BR&page=1`,
+  );
 
-    return res.data;
-}
+  return res.data.results;
+};
 
- export const getNowPlaying= async () => {
+export const getPopularMovies = async () => {
+  const res = await tmdbApi.get<Data>(`/movie/popular?language=pt-BR&page=1`);
 
-    const res = await tmdbApi.get<Data>(`/movie/now_playing?language=pt-BR&page=1`)
+  return res.data.results;
+};
 
-    return res.data.results;
-}
+export const getTopRated = async () => {
+  const res = await tmdbApi.get<Data>(`/movie/top_rated?language=pt-BR&page=1`);
 
- export const getPopularMovies = async () => {
-
-    const res = await tmdbApi.get<Data>(`/movie/popular?language=pt-BR&page=1`)
-
-    return res.data.results;
-}
-
- export const getTopRated = async () => {
-
-    const res = await tmdbApi.get<Data>(`/movie/top_rated?language=pt-BR&page=1`)
-
-    return res.data.results;
-}
+  return res.data.results;
+};
