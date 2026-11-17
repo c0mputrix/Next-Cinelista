@@ -16,9 +16,13 @@ export const getTrendindMovies = async () => {
 export const getMovieDetails = async (
   id: number,
 ): Promise<Filme | undefined> => {
-  const res = await tmdbApi.get<Filme>(`/movie/${id}?language=pt-BR`);
-
-  return res.data;
+  try {
+    const res = await tmdbApi.get<Filme>(`/movie/${id}?language=pt-BR`);
+    return res.data;
+  } catch {
+    // Filme inexistente (404) → a página mostra o "não encontrado"
+    return undefined;
+  }
 };
 
 export const getNowPlaying = async () => {

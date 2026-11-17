@@ -1,24 +1,41 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./Header.module.css";
 
-const Header = () => {
-  return (
-    <>
-      <header className={styles.header}>
-        <div className={styles.header__container}>
-          <h1 className={styles.header__logo}>
-            <Link href="/">Cinelista</Link>
-          </h1>
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/filmes/em-alta", label: "Em alta" },
+  { href: "/filmes/populares", label: "Populares" },
+  { href: "/filmes/top-filmes", label: "Top Filmes" },
+];
 
-          <nav className={styles.header__nav}>
-            <Link href="/">Home</Link>
-            <Link href="/filmes/em-alta">Em alta</Link>
-            <Link href="/filmes/populares">Populares</Link>
-            <Link href="/filmes/top-filmes">Top Filmes</Link>
-          </nav>
-        </div>
-      </header>
-    </>
+const Header = () => {
+  const pathname = usePathname();
+
+  return (
+    <header className={styles.header}>
+      <div className={styles.header__container}>
+        <h1 className={styles.header__logo}>
+          <Link href="/">
+            Cine<span>lista</span>
+          </Link>
+        </h1>
+
+        <nav className={styles.header__nav}>
+          {links.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className={pathname === href ? styles.ativo : undefined}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+    </header>
   );
 };
 export default Header;

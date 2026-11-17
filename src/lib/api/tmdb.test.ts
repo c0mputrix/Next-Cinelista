@@ -1,7 +1,7 @@
 import tmdbApi from "./axios";
 import { getTrendindMovies } from "./tmdb";
 
-jest.mock (".axios");
+jest.mock("./axios");
 test ("Retorna filmes em destaque corretamente", async () => {
     //Arrange  
     const mockResults = [{id: 1, title: "Matrix"}];
