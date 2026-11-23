@@ -1,5 +1,5 @@
 import tmdbApi from "./axios";
-import { getTrendindMovies } from "./tmdb";
+import { getTrendingMovies } from "./tmdb";
 
 jest.mock("./axios");
 test ("Retorna filmes em destaque corretamente", async () => {
@@ -9,7 +9,7 @@ test ("Retorna filmes em destaque corretamente", async () => {
       data: { results: mockResults },
      });
      //Act
-     const filmes = await getTrendindMovies();
+     const filmes = await getTrendingMovies();
 
      //Assert
      expect(filmes).toEqual(mockResults);

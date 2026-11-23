@@ -5,7 +5,7 @@ type Data = {
   results: Filme[];
 };
 
-export const getTrendindMovies = async () => {
+export const getTrendingMovies = async () => {
   const res = await tmdbApi.get<Data>(
     `/trending/movie/week?language=pt-BR&page=1`,
   );
