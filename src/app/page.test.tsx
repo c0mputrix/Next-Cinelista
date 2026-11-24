@@ -1,6 +1,10 @@
+// Extensão do Jest DOM: adiciona matchers como "toBeInTheDocument()"
 import "@testing-library/jest-dom";
+// Importa a função que será mockada
 import { getTrendingMovies } from "./../lib/api/tmdb";
+// Importa helpers para renderizar componentes e acessar a tela
 import { render, screen } from "@testing-library/react";
+// Importa a função de Server Component da página inicial
 import Home from "./page";
 
 jest.mock("./../lib/api/tmdb", () => ({
