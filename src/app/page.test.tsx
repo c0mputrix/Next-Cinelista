@@ -16,3 +16,30 @@ test("Exibe o título na página inicial corretamente", async () => {
   // Verifica o título que está no seu page.tsx ("Destaque")
   expect(screen.getByText("Destaque")).toBeInTheDocument();
 });
+
+test("Renderiza os filmes em destaque corretamente", async () => {
+
+  (getTrendingMovies as jest.Mock).mockResolvedValue([
+    {
+      id: 1,
+      title: "Filme teste",
+      overview: "Resumo teste",
+      poster_path: "public/next.svg",
+      vote_average: 8.0,
+    }
+  ]);
+
+  //Renderiza a página (internamente chama a função getTrendingMovies)
+  render(await Home());
+  //Verificar se o título renderizado aparece na tela
+  expect(await screen.findByText("Filme teste")).toBeInTheDocument();
+});  
+
+test("Exibir uma mensagem quando não houver filmes disponíveis", async () => {
+  (getTrendingMovies as jest.Mock).mockResolvedValue([]);
+
+  //Renderiza a página (internamente chama a função getTrendingMovies)
+  render(await Home());
+
+  expect(screen.getByText("Nenhum filme encontrado")).toBeInTheDocument();
+});
